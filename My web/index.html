@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minna Secondhand Market — Good finds, gently used</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF3E7;
+    --rust:#C1542C;
+    --sage:#6E7F5C;
+    --ink:#2E2A24;
+    --tag:#F2C572;
+    --line:#D8C9AE;
+    --card:#FFFDF8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+
+  /* HEADER */
+  header{
+    padding:22px 0;
+    border-bottom:1px solid var(--line);
+  }
+  header .wrap{display:flex; align-items:center; justify-content:space-between;}
+  .logo{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Fraunces', serif; font-weight:700; font-size:1.3rem;
+  }
+  .logo .dot{
+    width:14px;height:14px;border-radius:50%;
+    background:var(--rust);
+    transform:rotate(-8deg);
+  }
+  nav{display:flex; gap:28px; font-size:0.95rem; font-weight:500;}
+  nav a{opacity:0.75; transition:opacity .2s;}
+  nav a:hover{opacity:1;}
+  .header-call{
+    background:var(--ink); color:var(--paper);
+    padding:10px 18px; border-radius:30px;
+    font-size:0.9rem; font-weight:600;
+  }
+
+  /* HERO */
+  .hero{
+    padding:80px 0 60px;
+    position:relative;
+  }
+  .hero .wrap{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:0.8rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em;
+    color:var(--sage);
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:24px; height:1px; background:var(--sage);
+  }
+  .hero h1{
+    font-size:3.4rem; line-height:1.02; margin-bottom:20px;
+  }
+  .hero h1 em{
+    font-style:italic; color:var(--rust);
+  }
+  .hero p.sub{
+    font-size:1.1rem; max-width:480px; opacity:0.8; margin-bottom:30px;
+  }
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:14px 26px; border-radius:30px;
+    font-weight:600; font-size:0.95rem;
+    transition:transform .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--rust); color:var(--paper);}
+  .btn-ghost{border:1.5px solid var(--ink); color:var(--ink);}
+
+  /* hero visual: tag stack */
+  .tag-stack{position:relative; height:360px;}
+  .price-tag{
+    position:absolute;
+    background:#2D2D2D;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:18px 20px;
+    box-shadow:0 14px 30px rgba(33,33,33);
+    width:190px;
+  }
+  .price-tag .label{font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; opacity:0.55; font-weight:600; color: #F2C572}
+  .price-tag .name{font-family:'Fraunces',serif; font-size:1.15rem; color: var(
+--paper); font-weight:600; margin:6px 0 4px;}
+  .price-tag .price{color:var(--tag); font-weight:700; font-size:1.3rem;}
+  .price-tag .hole{
+    position:absolute; top:-9px; left:24px;
+    width:18px; height:18px; border-radius:50%;
+    background:var(--tag); border:1px solid var(--tag);
+  }
+  .tag1{top:0; left:30px; transform:rotate(-6deg); z-index:2;}
+  .tag2{top:120px; left:150px; transform:rotate(5deg); z-index:1;}
+  .tag3{top:240px; left:0; transform:rotate(-3deg); z-index:3;}
+
+  /* TRUST STRIP */
+  .trust{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:28px 0;
+  }
+  .trust .wrap{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px;
+  }
+  .trust-item{display:flex; align-items:center; gap:10px; font-size:0.92rem; font-weight:500; opacity:0.8;}
+  .trust-item .ico{
+    width:8px;height:8px;border-radius:50%;background:var(--sage);
+  }
+
+  /* SECTION HEADERS */
+  .section{padding:70px 0;}
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    margin-bottom:38px; gap:20px; flex-wrap:wrap;
+  }
+  .section-head h2{font-size:2.1rem;}
+  .section-head p{opacity:0.7; max-width:380px; font-size:0.98rem;}
+
+  /* PRODUCT GRID */
+  .grid{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:22px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover{transform:translateY(-4px); box-shadow:0 16px 28px rgba(46,42,36,0.08);}
+  .card-img{
+    aspect-ratio:1/1;
+    background:linear-gradient(135deg, var(--tag), var(--sage) 140%);
+    position:relative;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-size:0.85rem; color:rgba(46,42,36,0.45); font-weight:600;
+  }
+  .condition{
+    position:absolute; top:10px; left:10px;
+    background:var(--ink); color:var(--paper);
+    font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em;
+    padding:5px 10px; border-radius:20px;
+  }
+  .card-body{padding:16px 16px 18px;}
+  .card-body .name{font-weight:600; font-size:1rem; margin-bottom:4px;}
+  .card-body .meta{font-size:0.82rem; opacity:0.6; margin-bottom:10px;}
+  .card-body .row{display:flex; justify-content:space-between; align-items:center;}
+  .card-body .price{font-family:'Fraunces',serif; font-weight:700; color:var(--rust); font-size:1.15rem;}
+  .card-body .call{
+    font-size:0.78rem; font-weight:600;
+    border:1px solid var(--ink); border-radius:20px;
+    padding:6px 12px;
+  }
+
+  /* HOW IT WORKS */
+  .how-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:30px;}
+  .how-item{padding-right:10px;}
+  .how-item .mark{
+    font-family:'Fraunces',serif; font-style:italic; color:var(--sage);
+    font-size:1.6rem; margin-bottom:14px; display:block;
+  }
+  .how-item h3{font-size:1.2rem; margin-bottom:8px;}
+  .how-item p{font-size:0.92rem; opacity:0.75;}
+
+  /* CTA */
+  .cta{
+    background:var(--ink); color:var(--paper);
+    border-radius:24px;
+    padding:60px 50px;
+    display:flex; justify-content:space-between; align-items:center; gap:30px;
+    flex-wrap:wrap;
+  }
+  .cta h2{font-size:2.1rem; max-width:480px; color:var(--paper);}
+  .cta h2 em{color:var(--tag); font-style:italic;}
+  .cta .btn-primary{background:var(--tag); color:var(--ink);}
+
+  /* FOOTER */
+  footer{
+    border-top:1px solid var(--line);
+    padding:36px 0;
+    font-size:0.85rem; opacity:0.65;
+  }
+  footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px;}
+
+ @media (max-width: 860px){
+    .hero .wrap{grid-template-columns:1fr;}
+    .hero h1{font-size:1.3rem;}
+    .tag-stack{height:220px; margin-top:20px;}
+    nav{display:none;}
+    .grid{grid-template-columns:repeat(2,1fr); gap:12px;}
+    .how-grid{grid-template-columns:1fr;}
+    .cta{padding:20px 15px;}
+    .card-body{padding:10px 10px 12px;}
+    .card-body .name{font-size:0.82rem;}
+    .card-body .meta{font-size:0.72rem;}
+    .card-body .price{font-size:0.95rem;}
+    .card-body .call{font-size:0.7rem; padding:5px 8px;}
+    .wrap{padding:0 14px;}
+   .grid a{display:contents;}
+}
+</style>
+ <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6R8NGHE5G">
+    </script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Y6R8NGHE5G');
+    </script>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo"><span class="dot"></span>Minna Secondhand Market</div>
+    <nav>
+      <a href="#listings">Listings</a>
+      <a href="#how">How it works</a>
+      <a href="#contact">Contact</a>
+      <a href="Request.html">Request item</a>
+    </nav>
+   <a class="header-call" href="Request.html" style="background:var(--sage); font-size:0.78rem; padding:8px 14px;">Can't find it? Request</a>
+<a class="header-call" href="https://wa.me/2349065054698" style="font-size:0.78rem; padding:8px 14px;">💬 WhatsApp</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Gently used · Honestly priced</span>
+      <h1>Good things<br>deserve a <em>second</em> owner.</h1>
+      <p class="sub">Browse real items from real sellers — phones, furniture, clothes and more, all checked over and priced fairly. No middlemen, no surprises.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#listings">See whats Available</a>
+        <a class="btn btn-ghost" href="https://wa.me/2349065054698">Call to sell yours</a>
+      </div>
+    </div>
+    <div class="tag-stack">
+      <div class="price-tag tag1"><span class="hole"></span>
+        <div class="label">Phones</div>
+        <div class="name">Crusher Juicer</div>
+        <div class="price">₦8,000</div>
+      </div>
+      <div class="price-tag tag2"><span class="hole"></span>
+        <div class="label">Furniture</div>
+        <div class="name">LED torch light</div>
+        <div class="price">₦40,000</div>
+      </div>
+      <div class="price-tag tag3"><span class="hole"></span>
+        <div class="label">Fashion</div>
+        <div class="name">Denim jacket, M</div>
+        <div class="price">₦7,500</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap">
+    <div class="trust-item"><span class="ico"></span>Every item inspected before listing</div>
+    <div class="trust-item"><span class="ico"></span>Talk to the seller directly</div>
+    <div class="trust-item"><span class="ico"></span>Local pickup, no shipping guesswork</div>
+  </div>
+</div>
+
+<section class="section" id="listings">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Latest finds</h2>
+      <p>A small, changing selection of items currently up for grabs. Call the number on any listing to ask questions or arrange a pickup.</p>
+    </div>
+    <div class="grid">
+
+        <a href="Crusher Juicer.html" style="text-decoration:none; color: inherit;" >
+      <div class="card">
+        <div class="card-img">
+          <img src="Photos/Screenshot 2026-07-04 033013.jpg" alt="iPhone 11, 64GB" style="width:100%; height:100%; object-fit:cover;">
+          <span class="condition">Like new</span>
+        </div>
+        <div class="card-body">
+          <div class="name">Crusher Juicer</div>
+          <div class="meta">Pink colored</div>
+          <div class="row">
+            <span class="price">₦8,000</span>
+            <a class="call" href="https://wa.me/2349065054698">Order now</a>
+          </div>
+        </div>
+      </div>
+   </a>
+
+        <a href="product1.html" style="text-decoration:none; color: inherit;" >
+      <div class="card">
+        <div class="card-img">
+          <img src="Photos/spxvl254.jpg" alt="LED torch light" style="width:100%; height:100%; object-fit:cover;">
+          <span class="condition">Good</span></div>
+        <div class="card-body">
+          <div class="name">LED torch light</div>
+          <div class="meta">Brand new</div>
+          <div class="row">
+            <span class="price">₦4,000</span>
+            <a class="call" href="https://wa.me/2349065054698">Order now</a>
+        </div>
+          </div>
+        </div>
+      </a>
+
+
+        <a href="product3.html" style="text-decoration:none; color: inherit;" >
+      <div class="card">
+        <div class="card-img">
+          <img src="Photos/shop-1737.jpg" alt="Baggy jeans"style="width:100%; height:100%; object-fit:cover;">
+          <span class="condition">Good</span></div>
+        <div class="card-body">
+          <div class="name">Baggy jeans</div>
+          <div class="meta">Lightly worn · no stains</div>
+          <div class="row">
+            <span class="price">₦7,500</span>
+            <a class="call" href="https://wa.me/2349065054698">Order now</a>
+          </div>
+           </div>
+        </div>
+        </a>
+
+        <a href="product4.html" style= text decoration:none; color inherit;">
+      <div class="card">
+        <div class="card-img">
+          <img src="Photos/Air fryer.jpg" alt="Air fryer"style="width:100%; height:100%; object-fit:cover;">
+         <span class="condition">Fair</span></div>
+        <div class="card-body">
+          <div class="name">Air fryer</div>
+          <div class="meta">lightly used</div>
+          <div class="row">
+            <span class="price">₦7,000</span>
+            <a class="call" href="https://wa.me/2349065054698">Order now</a>
+          </div>
+        </div>
+      </div>
+      </a>
+     
+         <a href="product5.html" style= text decoration:none; color inherit;">
+      <div class="card">
+        <div class="card-img">
+          <img src="Photos/airpods.jpg" alt="Airpods II Pro"style="width:100%; height:100%; object-fit:cover;">
+          <span class="condition">Like new</span></div>
+        <div class="card-body">
+          <div class="name">Airpods pro II</div>
+          <div class="meta">Few scratches on the case</div>
+          <div class="row">
+            <span class="price">₦16,000</span>
+            <a class="call" href="https://wa.me/2349065054698">Order now</a>
+          </div>
+        </div>
+      </div>
+     </a>
+
+        <a href="product6.html" style= text decoration:none; color inherit;">
+      <div class="card">
+        <div class="card-img">
+          <img src="Photos/non stick pot.jpg" alt="Non Stick Pot"style="width:100%; height:100%; object-fit:cover;">
+          <span class="condition">Good</span></div>
+        <div class="card-body">
+          <div class="name">Non stick pot</div>
+          <div class="meta">2 months used</div>
+          <div class="row">
+            <span class="price">₦21,000</span>
+            <a class="call" href="https://wa.me/2349065054698">Order now</a>
+          </div>
+        </div>
+      </div>
+       </a>
+
+        <a href="product7.html" style= text decoration:none; color inherit;">
+      <div class="card">
+        <div class="card-img">
+          <img src="Photos/Hisense microwave.jpg" alt="Hisense microwave"style="width:100%; height:100%; object-fit:cover;">
+          <span class="condition">Affordable</span></div>
+        <div class="card-body">
+          <div class="name">Microwave oven</div>
+          <div class="meta">700W · works perfectly</div>
+          <div class="row">
+            <span class="price">₦15,000</span>
+            <a class="call" href="https://wa.me/2349065054698">Order now</a>
+          </div>
+        </div>
+      </div>
+       </a>
+
+         <a href="product7.html" style= text decoration:none; color inherit;">
+      <div class="card">
+        <div class="card-img">
+           <img src="Photos/leather bag.jpg" alt="Leather Bag"style="width:100%; height:100%; object-fit:cover;">
+           <span class="condition">Like new</span></div>
+        <div class="card-body">
+          <div class="name">Leather handbag</div>
+          <div class="meta">Genuine leather · barely used</div>
+          <div class="row">
+            <span class="price">₦12,000</span>
+            <a class="call" href="https://wa.me/2349065054698">Order now</a>
+          </div>
+        </div>
+      </div>
+        </a>
+
+         <a href="product7.html" style= text decoration:none; color inherit;">
+     <div class="card">
+       <div class="card-img">
+         <img src="Photos/headphones.jpg" alt="Headphone"style="width:100%; height:100%; object-fit:cover;">
+         <span class="condition">Like new</span></div>
+       <div class="card-body">
+        <div class="name">Headphone</div>
+        <div class="meta">2 weeks used only</div>
+        <div class="row">
+          <span class="price">7,000</span>
+          <a class="call" href="https://wa.me/2349065054698">Order now</a>
+     </div>
+    </div>
+  </div>
+</a>
+
+          <a href="product8.html" style= text decoration:none; color inherit;">
+      <div class="card">
+        <div class="card-img">
+         <img src="Photos/" alt=""style="width:100%; height:100%; object-fit:cover;">
+         <span class="condition">Like new</span></div>
+       <div class="card-body">
+         <div class="name">Coming soon</div>
+         <div class="meta"></div>
+         <div class="row">
+           <span class="price"></span>
+           <a class="call" href="https://wa.me/2349065054698">Order now</a>
+       </div>
+     </div>
+   </div>
+   </a>
+
+   <a href="product9.html" style= text decoration:none; color inherit;">
+ <div class="card">
+        <div class="card-img">
+         <img src="Photos/" alt=""style="width:100%; height:100%; object-fit:cover;">
+         <span class="condition">Like new</span></div>
+       <div class="card-body">
+         <div class="name">Coming soon</div>
+         <div class="meta"></div>
+         <div class="row">
+           <span class="price"></span>
+           <a class="call" href="https://wa.me/2349065054698">Order now</a>
+       </div>
+     </div>
+   </div>
+  </a>
+
+   <a href="product10.html" style= text decoration:none; color inherit;">
+ <div class="card">
+        <div class="card-img">
+         <img src="Photos/" alt=""style="width:100%; height:100%; object-fit:cover;">
+         <span class="condition">Like new</span></div>
+       <div class="card-body">
+         <div class="name">Coming soon</div>
+         <div class="meta"></div>
+         <div class="row">
+           <span class="price"></span>
+           <a class="call" href="https://wa.me/2349065054698">Order now</a>
+       </div>
+     </div>
+   </div>
+  </a>
+
+  <a href="product11.html" style= text decoration:none; color inherit;">
+ <div class="card">
+        <div class="card-img">
+         <img src="Photos/" alt=""style="width:100%; height:100%; object-fit:cover;">
+         <span class="condition">Like new</span></div>
+       <div class="card-body">
+         <div class="name">Coming soon</div>
+         <div class="meta"></div>
+         <div class="row">
+           <span class="price"></span>
+           <a class="call" href="https://wa.me/2349065054698">Order now</a>
+       </div>
+     </div>
+   </div>
+  </a>
+
+   <a href="product12.html" style= text decoration:none; color inherit;">
+ <div class="card">
+        <div class="card-img">
+         <img src="Photos/" alt=""style="width:100%; height:100%; object-fit:cover;">
+         <span class="condition">Like new</span></div>
+       <div class="card-body">
+         <div class="name">Coming soon</div>
+         <div class="meta"></div>
+         <div class="row">
+           <span class="price"></span>
+           <a class="call" href="https://wa.me/2349065054698">Order now</a>
+       </div>
+     </div>
+   </div>
+   </a>
+
+   <a href="product13.html" style= text decoration:none; color inherit;">
+ <div class="card">
+        <div class="card-img">
+         <img src="Photos/" alt=""style="width:100%; height:100%; object-fit:cover;">
+         <span class="condition">Like new</span></div>
+       <div class="card-body">
+         <div class="name">Coming soon</div>
+         <div class="meta"></div>
+         <div class="row">
+           <span class="price"></span>
+           <a class="call" href="https://wa.me/2349065054698">Order now</a>
+       </div>
+     </div>
+   </div>
+    </a>
+
+    <a href="product14.html" style= text decoration:none; color inherit;">
+ <div class="card">
+        <div class="card-img">
+         <img src="Photos/" alt=""style="width:100%; height:100%; object-fit:cover;">
+         <span class="condition">Like new</span></div>
+       <div class="card-body">
+         <div class="name">Coming soon</div>
+         <div class="meta"></div>
+         <div class="row">
+           <span class="price"></span>
+           <a class="call" href="https://wa.me/2349065054698">Order now</a>
+       </div>
+     </div>
+   </div>
+    </a>
+
+</section>
+
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>How it works</h2>
+    </div>
+    <div class="how-grid">
+      <div class="how-item">
+        <span class="mark">Look</span>
+        <h3>Browse what's available</h3>
+        <p>Scroll the listings above. Each one shows the real condition and a fair price — no haggling games.</p>
+      </div>
+      <div class="how-item">
+        <span class="mark">Ask</span>
+        <h3>Call before you commit</h3>
+        <p>Tap "Call" on any item to speak with the seller directly, ask questions, and confirm details.</p>
+      </div>
+      <div class="how-item">
+        <span class="mark">Meet</span>
+        <h3>Pick it up locally</h3>
+        <p>Arrange a convenient time and place to collect your item and pay. Simple as that.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="cta">
+      <h2>Got something to sell? <em>List it with us.</em></h2>
+      <a class="btn btn-primary" href="https://wa.me/2349065054698">💬 WhatsApp Us</a>
+    </div>
+
+    <div style="text-align:center; padding:20px 0; font-family:'Fraunces',serif; font-size:2rem; font-weight:700; opacity:0.3;">— OR —</div>
+
+    <div class="cta">
+      <h2>Can't find it? <em>We'll source it for you.</em></h2>
+      <a class="btn btn-primary" href="Request.html">Request an item →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Minna Secondhand Market</span>
+    <span>All items sold as-is between buyer and seller.</span>
+</footer>
+
+</body>
+</html>
